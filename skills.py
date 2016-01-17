@@ -151,7 +151,35 @@ def translate_to_pirate_talk(phrase):
 
     """
 
-    return ""
+    pirate_dict = { "sir": "matey",
+                    'man': 'matey', #had to add translation for 'man' for this to work
+                    'hotel': 'fleabag inn',
+                    'student': 'swabbie',
+                    'boy': 'matey',
+                    'professor': 'foul blaggart',
+                    'restaurant': 'galley',
+                    'your': 'yer',
+                    'excuse': 'arr',
+                    'students': 'swabbies',
+                    'are': 'be',
+                    'restroom': 'head',
+                    'my': 'me',
+                    'is': 'be'}
+
+    words_list = phrase.split(' ')
+
+    pirate_phrase_list = []
+
+    for word in words_list:
+        if word in pirate_dict:
+            word = pirate_dict[word]
+            pirate_phrase_list.append(word)
+        else:
+            pirate_phrase_list.append(word)
+
+    piratey_phrase = (' ').join(pirate_phrase_list)
+
+    return piratey_phrase
 
 
 def sort_by_word_length(words):
@@ -168,7 +196,24 @@ def sort_by_word_length(words):
 
     """
 
-    return []
+    word_length_dict = {}
+
+    for word in words:
+        length = len(word)
+        if length in word_length_dict:
+            word_length_dict[length].append(word)
+        else:
+            word_length_dict[length] = [word]    
+
+    list_of_tuples = []
+
+
+    for length, word_list in word_length_dict.iteritems():
+        length_and_word_list = [length, word_list]
+        new_tuple = tuple(length_and_word_list)
+        list_of_tuples.append(new_tuple)
+
+    return list_of_tuples
 
 
 def get_sum_zero_pairs(input_list):
