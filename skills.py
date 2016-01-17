@@ -245,7 +245,20 @@ def get_sum_zero_pairs(input_list):
 
     """
 
-    return []
+    duplicates_removed = set(input_list)
+
+    list_of_sum_zero_pairs = []
+
+    for number in duplicates_removed:
+        number = -(number)
+        if number in duplicates_removed:
+            sum_zero_pair = [number, -number]
+            sum_zero_pair_sorted = sorted(sum_zero_pair)
+            if sum_zero_pair_sorted not in list_of_sum_zero_pairs: 
+                list_of_sum_zero_pairs.append(sum_zero_pair_sorted) 
+        
+
+    return list_of_sum_zero_pairs
 
 
 ##############################################################################
