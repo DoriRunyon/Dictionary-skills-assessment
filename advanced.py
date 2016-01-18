@@ -29,7 +29,33 @@ def top_characters(input_string):
 
     """
 
-    return []
+    words = input_string.split(" ")
+
+    letter_counter = {}
+
+    for word in words:
+        for letter in word:
+            if letter in letter_counter:
+                letter_counter[letter] += 1
+            else:
+                letter_counter[letter] = 1
+
+    list_of_words = []
+
+    for letter, number in letter_counter.iteritems():
+        mini_list = [number, letter]
+        list_of_words.append(mini_list)
+
+    sorted_list = sorted(list_of_words)
+
+    last_letter = sorted_list[len(sorted_list)-1]
+    most_frequent_letters = []
+
+    for mini_list in sorted_list:
+        if mini_list[0] == last_letter[0]:
+            most_frequent_letters.append(mini_list[1])
+
+    return most_frequent_letters
 
 
 def adv_alpha_sort_by_word_length(words):
