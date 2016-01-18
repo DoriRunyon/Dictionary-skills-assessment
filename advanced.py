@@ -33,6 +33,8 @@ def top_characters(input_string):
 
     letter_counter = {}
 
+    #count the frequency of letters, and add the key/value pairs to a dict
+
     for word in words:
         for letter in word:
             if letter in letter_counter:
@@ -42,14 +44,26 @@ def top_characters(input_string):
 
     list_of_words = []
 
+    #make a list out of every key/value pair in the dict, and put each 'mini list' in
+    #the 'list of words'
+
     for letter, number in letter_counter.iteritems():
         mini_list = [number, letter]
         list_of_words.append(mini_list)
 
+    #sort the 'list of words' so that the list goes from lowest frequency, to highest
+
     sorted_list = sorted(list_of_words)
+
+    #create a variable which is the "last letter" in the dict (the most frequent or
+    #one of the most frequent.)
 
     last_letter = sorted_list[len(sorted_list)-1]
     most_frequent_letters = []
+
+    #check the list to see if any other letters had the same frequency as the
+    #"last letter", if there are any, put them in the list. "Last letter" will be
+    #appended to the list last.
 
     for mini_list in sorted_list:
         if mini_list[0] == last_letter[0]:
@@ -73,7 +87,33 @@ def adv_alpha_sort_by_word_length(words):
 
     """
 
-    return []
+    word_length_dict = {}
+
+    #for every word in the list, get the word length. If that "length" is already
+    #in the dictionary, add that word to the existing list of words for that "length".
+    #If the "length" is not in the dictionary, create a new key/value pair.
+
+    for word in words:
+        length = len(word)
+        if length in word_length_dict:
+            word_length_dict[length].append(word)
+        else:
+            word_length_dict[length] = [word]
+
+    list_of_tuples = []
+
+    #for every key/value pair in the dictionary, create a new list with two
+    #items, length and word list. Then make that list into a tuple and append
+    #the tuple to the list of tuples.
+
+
+    for length, word_list in word_length_dict.iteritems():
+        sorted_word_list = sorted(word_list)
+        length_and_word_list = [length, sorted_word_list]
+        new_tuple = tuple(length_and_word_list)
+        list_of_tuples.append(new_tuple)
+
+    return list_of_tuples
 
 
 ##############################################################################
