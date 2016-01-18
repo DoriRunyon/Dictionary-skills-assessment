@@ -102,7 +102,12 @@ def count_unique(input_string):
 
     unique_words_dict = {}
 
+    #split string into a list
+
     words_list = input_string.split(' ')
+
+    #for every word in the list, create a key/value pair, and if it's already
+    #in the dictionary, add one to its count
 
     for word in words_list:
         if word in unique_words_dict:
@@ -152,7 +157,7 @@ def translate_to_pirate_talk(phrase):
     """
 
     pirate_dict = { "sir": "matey",
-                    'man': 'matey', #had to add translation for 'man' for this to work
+                    'man': 'matey',  #had to add translation for 'man' for this to work
                     'hotel': 'fleabag inn',
                     'student': 'swabbie',
                     'boy': 'matey',
@@ -166,9 +171,17 @@ def translate_to_pirate_talk(phrase):
                     'my': 'me',
                     'is': 'be'}
 
+    #split string into list
+
     words_list = phrase.split(' ')
 
+    #create a new list for the new words
+
     pirate_phrase_list = []
+
+    #for every word in the phrase, if the word is in the pirate dictionary,
+    #it's new value is the pirate word (add the new word to the new list).
+    #If it's not in the dictionary, stick it in the new list unchanged.
 
     for word in words_list:
         if word in pirate_dict:
@@ -176,6 +189,8 @@ def translate_to_pirate_talk(phrase):
             pirate_phrase_list.append(word)
         else:
             pirate_phrase_list.append(word)
+
+    #join the new list into a string
 
     piratey_phrase = (' ').join(pirate_phrase_list)
 
@@ -198,14 +213,22 @@ def sort_by_word_length(words):
 
     word_length_dict = {}
 
+    #for every word in the list, get the word length. If that "length" is already
+    #in the dictionary, add that word to the existing list of words for that "length".
+    #If the "length" is not in the dictionary, create a new key/value pair.
+
     for word in words:
         length = len(word)
         if length in word_length_dict:
             word_length_dict[length].append(word)
         else:
-            word_length_dict[length] = [word]    
+            word_length_dict[length] = [word]
 
     list_of_tuples = []
+
+    #for every key/value pair in the dictionary, create a new list with two
+    #items, length and word list. Then make that list into a tuple and append
+    #the tuple to the list of tuples.
 
 
     for length, word_list in word_length_dict.iteritems():
@@ -245,18 +268,25 @@ def get_sum_zero_pairs(input_list):
 
     """
 
+    #Turn the input list into a set, which removes duplicates.
+
     duplicates_removed = set(input_list)
 
     list_of_sum_zero_pairs = []
+
+    #For every number in the set, the new number equals itself times -1. If the
+    #new number is in the set, create a pair list with two items, the number and
+    #it's sum zero pair. Sort the pair, so that the negative value is first (this
+    #solves the problem of duplicate sum zero pair being created with switched order).
+    #If that sum zero pair is not in the list already, put it in the sum zero pair list.
 
     for number in duplicates_removed:
         number = -(number)
         if number in duplicates_removed:
             sum_zero_pair = [number, -number]
             sum_zero_pair_sorted = sorted(sum_zero_pair)
-            if sum_zero_pair_sorted not in list_of_sum_zero_pairs: 
-                list_of_sum_zero_pairs.append(sum_zero_pair_sorted) 
-        
+            if sum_zero_pair_sorted not in list_of_sum_zero_pairs:
+                list_of_sum_zero_pairs.append(sum_zero_pair_sorted)
 
     return list_of_sum_zero_pairs
 
